@@ -1,0 +1,21 @@
+.header{
+    width: 800px;
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+
+}
+
+.main{
+    display: flex;
+    justify-self: center;
+}
+
+.grid{
+    width: 800px;
+    height: 800px;
+    border: solid;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
