@@ -10,6 +10,7 @@ function createGrid(gridDimesions= 16){
 function createPixelDiv(size){
     const grid = document.querySelector(".grid");
     const pixel = document.createElement("div");
+    pixel.classList.add("grid-pixel")
     pixel.style.boxSizing = "border-box";
     pixel.style.height = `${size}px`;
     pixel.style.width = `${size}px`;
@@ -17,4 +18,29 @@ function createPixelDiv(size){
     grid.appendChild(pixel);
 }
 
+function addPixelListener(){
+    let gridPixels = document.querySelectorAll(".grid-pixel");
+    gridPixels.forEach(gridPixel =>{gridPixel.addEventListener("mouseenter", e => {
+    gridPixel.style.backgroundColor = "black";})
+});
+}
+
+function addPixelListenerWithEventDelegation(){
+    const grid = document.querySelector(".grid");
+    grid.addEventListener("mouseover", (e) => {
+        if (e.target && e.target.classList.contains("grid-pixel")) {//is this neccesary?
+            e.target.style.backgroundColor = "black";
+    }
+});
+}
+
+
+let playButton = document.querySelector(".button");
+playButton.addEventListener("click", () => {
+    let gridSize = prompt("choose");
+    createGrid(gridSize);
+//needs to destroy the old grid first
+})
+
 createGrid();
+addPixelListener();
