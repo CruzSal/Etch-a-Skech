@@ -1,10 +1,14 @@
 const DEFAULT_COLOR = "black";
 const DEFAULT_SIZE = "16";
 
+let paintColor = DEFAULT_COLOR;
+
 
 function createGrid(gridDimesions= DEFAULT_SIZE){
     let gridSize = gridDimesions**2;
     let pixelSize = 800/gridDimesions;
+
+    document.querySelector(".grid").innerHTML = "";
 
     for (let i = 1; i <= gridSize; i++)
         createPixelDiv(pixelSize);
@@ -30,16 +34,23 @@ function addMainEventListener(type, selector, callback){
             callback(e);
     })
 }
+function resetGrid(){
+    const gridPixels = document.querySelectorAll(".grid-pixel");
+    gridPixels.forEach(element =>  element.style.backgroundColor = "white");
+}
+
+function updateGridSizeMessage(e){
+    const gridSizeMessage = document.querySelector("#grid-size");
+    gridSizeMessage.innerHTML = `Grid Size: ${e.target.value} x ${e.target.value}`;
+
+}
 
 
 createGrid();
 
-let paintColor = DEFAULT_COLOR;
-
 addMainEventListener("change", "#grid-slider", e => createGrid(e.target.value));
-//needs to destroy the old grid first
+addMainEventListener("mousemove", "#grid-slider", (e) => updateGridSizeMessage(e));
 addMainEventListener("mouseover", ".grid-pixel", e => e.target.style.backgroundColor = paintColor);
 addMainEventListener("input", "#paint-color", (e) => paintColor = e.target.value);
-addMainEventListener("click", "#color-button", () => paintColor = "red");
-//color changer not workking
+addMainEventListener("click", "#reset-button", () => resetGrid());
 

@@ -11,12 +11,15 @@
         <h1 class="title">Etch-a-Sketch</h1>
     </div>
     <div class="main">
-        <div class="controls">
+        <div class="controls" id="left-side-controls">
+            <div id="grid-size">Grid Size: 16 x 16 </div>
             <input id="grid-slider" type="range" value="16" min="1" max="100">
-            <input id="paint-color" type="color" value="#000000">
-            <button class="button" id="color-button">Choose color</button>
+            <button class="button" id="reset-button">Reset</button>
         </div>
         <div class="grid"></div>
+        <div class="controls" id="right-side-controls">
+            <input id="paint-color" type="color" value="#000000">
+        </div>
     </div>
     <div class="footer"></div>
     <script src="main-script.js"></script>

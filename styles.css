@@ -8,13 +8,14 @@
 
 .main{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-self: center;
 }
 
 .controls{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-self: center;
 }
 
 .grid{
