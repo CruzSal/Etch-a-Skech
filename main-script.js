@@ -39,5 +39,7 @@ let paintColor = DEFAULT_COLOR;
 addMainEventListener("change", "#grid-slider", e => createGrid(e.target.value));
 //needs to destroy the old grid first
 addMainEventListener("mouseover", ".grid-pixel", e => e.target.style.backgroundColor = paintColor);
+addMainEventListener("input", "#paint-color", (e) => paintColor = e.target.value);
 addMainEventListener("click", "#color-button", () => paintColor = "red");
+//color changer not workking
 
