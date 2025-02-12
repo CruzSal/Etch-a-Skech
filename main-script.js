@@ -1,4 +1,8 @@
-function createGrid(gridDimesions= 16){
+const DEFAULT_COLOR = "black";
+const DEFAULT_SIZE = "16";
+
+
+function createGrid(gridDimesions= DEFAULT_SIZE){
     let gridSize = gridDimesions**2;
     let pixelSize = 800/gridDimesions;
 
@@ -18,29 +22,22 @@ function createPixelDiv(size){
     grid.appendChild(pixel);
 }
 
-function addPixelListener(){
-    let gridPixels = document.querySelectorAll(".grid-pixel");
-    gridPixels.forEach(gridPixel =>{gridPixel.addEventListener("mouseenter", e => {
-    gridPixel.style.backgroundColor = "black";})
-});
+
+function addMainEventListener(type, selector, callback){
+    let main = document.querySelector(".main");//In addGlobal.. this line is not needed replace main for document below
+    main.addEventListener(type, e => {
+        if(e.target.matches(selector)) 
+            callback(e);
+    })
 }
 
-function addPixelListenerWithEventDelegation(){
-    const grid = document.querySelector(".grid");
-    grid.addEventListener("mouseover", (e) => {
-        if (e.target && e.target.classList.contains("grid-pixel")) {//is this neccesary?
-            e.target.style.backgroundColor = "black";
-    }
-});
-}
-
-
-let playButton = document.querySelector(".button");
-playButton.addEventListener("click", () => {
-    let gridSize = prompt("choose");
-    createGrid(gridSize);
-//needs to destroy the old grid first
-})
 
 createGrid();
-addPixelListener();
+
+let paintColor = DEFAULT_COLOR;
+
+addMainEventListener("change", "#grid-slider", e => createGrid(e.target.value));
+//needs to destroy the old grid first
+addMainEventListener("mouseover", ".grid-pixel", e => e.target.style.backgroundColor = paintColor);
+addMainEventListener("click", "#color-button", () => paintColor = "red");
+
